@@ -21,6 +21,7 @@ func log(h http.Handler) http.Handler {
 func protect(h http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		// some code to make sure the user is authorized
+		fmt.Println("protected.")
 		h.ServeHTTP(w, r)
 	})
 }
@@ -30,6 +31,7 @@ func main() {
 		Addr: "127.0.0.1:8080",
 	}
 	hello := HelloHandler{}
+	// 这里管道化处理器，不是处理器函数
 	http.Handle("/hello", protect(log(hello)))
 	server.ListenAndServe()
 }

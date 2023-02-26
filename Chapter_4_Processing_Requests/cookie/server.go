@@ -18,6 +18,9 @@ func setCookie(w http.ResponseWriter, r *http.Request) {
 	}
 	http.SetCookie(w, &c1)
 	http.SetCookie(w, &c2)
+	// 	# domain	path	name	value	                  date
+	// localhost	/	first_cookie	Go Web Programming	    -1
+	// localhost	/	second_cookie	Manning Publications Co	-1
 }
 
 func getCookie(w http.ResponseWriter, r *http.Request) {
@@ -28,6 +31,8 @@ func getCookie(w http.ResponseWriter, r *http.Request) {
 	cs := r.Cookies()
 	fmt.Fprintln(w, c1)
 	fmt.Fprintln(w, cs)
+	// 	first_cookie="Go Web Programming"
+	// [first_cookie="Go Web Programming" second_cookie="Manning Publications Co"]
 }
 
 func main() {
