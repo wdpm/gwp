@@ -32,8 +32,10 @@ func signupAccount(writer http.ResponseWriter, request *http.Request) {
 	}
 	if err := user.Create(); err != nil {
 		danger(err, "Cannot create user")
+		// TODO: don't redirect, keep in this page and show friendly error message feedback.
+	} else {
+		http.Redirect(writer, request, "/login", 302)
 	}
-	http.Redirect(writer, request, "/login", 302)
 }
 
 // POST /authenticate

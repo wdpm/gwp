@@ -11,3 +11,17 @@ Some differences include:
 * There are test files in this code
 * All structs are fully fleshed out (in the book chapter, they are only implied)
 * Some of the functions are placed as methods for the struct types instead of being a part of the package
+
+## How to run
+
+- build mode
+```bash
+go build
+
+.\chitchat
+```
+
+- source code mode
+```bash
+go run .
+```

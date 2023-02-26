@@ -1,6 +1,7 @@
 package data
 
 import (
+	"fmt"
 	"time"
 )
 
@@ -69,7 +70,7 @@ func (session *Session) DeleteByUUID() (err error) {
 	return
 }
 
-// Get the user from the session
+// User Get the user from the session
 func (session *Session) User() (user User, err error) {
 	user = User{}
 	err = Db.QueryRow("SELECT id, uuid, name, email, created_at FROM users WHERE id = $1", session.UserId).
@@ -77,7 +78,7 @@ func (session *Session) User() (user User, err error) {
 	return
 }
 
-// Delete all sessions from database
+// SessionDeleteAll Delete all sessions from database
 func SessionDeleteAll() (err error) {
 	statement := "delete from sessions"
 	_, err = Db.Exec(statement)
@@ -89,9 +90,11 @@ func (user *User) Create() (err error) {
 	// Postgres does not automatically return the last insert id, because it would be wrong to assume
 	// you're always using a sequence.You need to use the RETURNING keyword in your insert to get this
 	// information from postgres.
+	fmt.Println(createUUID(), user.Name, user.Email, Encrypt(user.Password), time.Now())
 	statement := "insert into users (uuid, name, email, password, created_at) values ($1, $2, $3, $4, $5) returning id, uuid, created_at"
 	stmt, err := Db.Prepare(statement)
 	if err != nil {
+		fmt.Printf("prepare statement failed: %s\n", err)
 		return
 	}
 	defer stmt.Close()

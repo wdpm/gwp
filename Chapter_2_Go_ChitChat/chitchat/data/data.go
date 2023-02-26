@@ -11,13 +11,36 @@ import (
 
 var Db *sql.DB
 
+const (
+	host     = "localhost"
+	port     = 5432
+	user     = "postgres"
+	password = "123456"
+	dbname   = "chitchat"
+)
+
 func init() {
+	// connection string
+	psqlconn := fmt.Sprintf("host=%s port=%d user=%s password=%s dbname=%s sslmode=disable",
+		host, port, user, password, dbname)
+
+	// open database
 	var err error
-	Db, err = sql.Open("postgres", "dbname=chitchat sslmode=disable")
+	Db, err = sql.Open("postgres", psqlconn)
+	CheckError(err)
+
+	// check db
+	err = Db.Ping()
+	CheckError(err)
+
+	fmt.Println("The database connects succeeded.")
+	return
+}
+
+func CheckError(err error) {
 	if err != nil {
 		log.Fatal(err)
 	}
-	return
 }
 
 // create a random UUID with from RFC 4122

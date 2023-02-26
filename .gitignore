@@ -1,2 +1,7 @@
 .DS_Store
 *.log
+.idea
+.fleet
+.vscode
+
+pkg
