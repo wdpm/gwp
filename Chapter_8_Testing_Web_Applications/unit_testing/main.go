@@ -3,8 +3,8 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+	"io/ioutil"
 	"os"
-  "io/ioutil"
 )
 
 type Post struct {
@@ -56,25 +56,25 @@ func unmarshal(filename string) (post Post, err error) {
 		fmt.Println("Error reading JSON data:", err)
 		return
 	}
-	json.Unmarshal(jsonData, &post)  
-  return
+	json.Unmarshal(jsonData, &post)
+	return
 }
 
 // Iterative Fibonacci
 func fibonacciIterative(n int) int {
-    current, prev := 0, 1
-    for i := 0; i < n; i++ {
-        current, prev = current + prev, current
-    }
-    return current
+	current, prev := 0, 1
+	for i := 0; i < n; i++ {
+		current, prev = current+prev, current
+	}
+	return current
 }
 
 // Recursive Fibonacci
 func fibonacciRecursive(n int) int {
-    if n < 2 {
-        return n
-    } 
-    return fibonacciRecursive(n - 1) + fibonacciRecursive(n - 2)
+	if n < 2 {
+		return n
+	}
+	return fibonacciRecursive(n-1) + fibonacciRecursive(n-2)
 }
 
 func main() {

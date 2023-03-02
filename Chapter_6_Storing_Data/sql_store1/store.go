@@ -17,7 +17,7 @@ var Db *sql.DB
 // connect to the Db
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	Db, err = sql.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -107,5 +107,5 @@ func main() {
 	fmt.Println(posts) // []
 
 	// Delete all posts
-  // DeleteAll()
+	// DeleteAll()
 }

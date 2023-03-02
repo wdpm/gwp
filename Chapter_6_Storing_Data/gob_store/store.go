@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"encoding/gob"
 	"fmt"
-	"io/ioutil"
+	"os"
 )
 
 type Post struct {
@@ -21,7 +21,7 @@ func store(data interface{}, filename string) {
 	if err != nil {
 		panic(err)
 	}
-	err = ioutil.WriteFile(filename, buffer.Bytes(), 0600)
+	err = os.WriteFile(filename, buffer.Bytes(), 0600)
 	if err != nil {
 		panic(err)
 	}
@@ -29,7 +29,7 @@ func store(data interface{}, filename string) {
 
 // load the data
 func load(data interface{}, filename string) {
-	raw, err := ioutil.ReadFile(filename)
+	raw, err := os.ReadFile(filename)
 	if err != nil {
 		panic(err)
 	}

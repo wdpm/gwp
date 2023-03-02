@@ -4,7 +4,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
-  "os"
+	"os"
 )
 
 type Post struct {
@@ -54,7 +54,7 @@ func main() {
 		return
 	}
 	jsonWriter := io.Writer(jsonFile)
-	encoder := json.NewEncoder(jsonWriter)  
+	encoder := json.NewEncoder(jsonWriter)
 	err = encoder.Encode(&post)
 	if err != nil {
 		fmt.Println("Error encoding JSON to file:", err)

@@ -2,7 +2,7 @@ package main
 
 import (
 	"testing"
-  "time"
+	"time"
 )
 
 // Test the decode function
@@ -14,9 +14,9 @@ func TestDecode(t *testing.T) {
 	if post.Id != 1 {
 		t.Error("Post ID is not the same as post.json", post.Id)
 	}
-  if post.Content != "Hello World!" {
-    t.Error("Post content is not the same as post.json", post.Id)
-  }
+	if post.Content != "Hello World!" {
+		t.Error("Post content is not the same as post.json", post.Id)
+	}
 }
 
 func TestUnmarshal(t *testing.T) {
@@ -27,11 +27,10 @@ func TestUnmarshal(t *testing.T) {
 	if post.Id != 1 {
 		t.Error("Post ID is not the same as post.json", post.Id)
 	}
-  if post.Content != "Hello World!" {
-    t.Error("Post content is not the same as post.json", post.Id)
-  }
+	if post.Content != "Hello World!" {
+		t.Error("Post content is not the same as post.json", post.Id)
+	}
 }
-
 
 // Test the encode function
 func TestEncode(t *testing.T) {
@@ -40,9 +39,12 @@ func TestEncode(t *testing.T) {
 
 // Long running test case
 func TestLongRunningTest(t *testing.T) {
-  if testing.Short() {
-    t.Skip("Skipping long running test in short mode")
-  }
-  time.Sleep(10 * time.Second)
+	if testing.Short() {
+		t.Skip("Skipping long running test in short mode")
+	}
+	time.Sleep(10 * time.Second)
 }
 
+// cd unit_testing
+// go test  -v
+// go test --short -v

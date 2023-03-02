@@ -68,3 +68,24 @@ flash message using cookie
 储在⻚⾯刷新时就会被移除的会话cookie⾥⾯。参考 cookie-flash/
 
 ## chapter 05
+
+Web模板引擎演变⾃SSI（服务器端包含）技术，并最
+终衍⽣出了诸如PHP、ColdFusion和JSP这样的Web编程语⾔。后端渲染。
+
+## chapter 06
+
+- 数据保存到内存：一般是一个map。
+- 数据保存到文件：csv、gob（二进制）、raw
+- 数据保存到数据库：利用 `database/sql`内置库，sqlx或者gorm框架，保存到传统数据库。
+
+## chapter 07
+
+xml和json的读取和保存，以及一个简易的Web API Server。
+
+## chapter 08
+
+- Go语⾔的 testing 库
+- 单元测试
+- HTTP测试
+- 使⽤依赖注⼊进⾏测试
+- 使⽤第三⽅测试库- 

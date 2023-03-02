@@ -40,7 +40,10 @@ func main() {
 
 	fmt.Println(string(jsonData))
 	var post Post
-	json.Unmarshal(jsonData, &post)
+	err2 := json.Unmarshal(jsonData, &post)
+	if err2 != nil {
+		return
+	}
 	fmt.Println(post.Id)
 	fmt.Println(post.Content)
 	fmt.Println(post.Author.Id)

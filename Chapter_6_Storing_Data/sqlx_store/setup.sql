@@ -1,4 +1,4 @@
-drop table posts;
+drop table posts cascade;
 
 create table posts (
   id      serial primary key,

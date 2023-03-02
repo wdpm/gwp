@@ -26,7 +26,7 @@ var Db *sql.DB
 // connect to the Db
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	Db, err = sql.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -37,7 +37,8 @@ func (comment *Comment) Create() (err error) {
 		err = errors.New("Post not found")
 		return
 	}
-	err = Db.QueryRow("insert into comments (content, author, post_id) values ($1, $2, $3) returning id", comment.Content, comment.Author, comment.Post.Id).Scan(&comment.Id)
+	err = Db.QueryRow("insert into comments (content, author, post_id) values ($1, $2, $3) returning id",
+		comment.Content, comment.Author, comment.Post.Id).Scan(&comment.Id)
 	return
 }
 
@@ -69,9 +70,15 @@ func (post *Post) Create() (err error) {
 	return
 }
 
+// precondition:
+// GRANT ALL PRIVILEGES ON DATABASE "gwp" to PUBLIC,gwp;
+
 func main() {
 	post := Post{Content: "Hello World!", Author: "Sau Sheong"}
-	post.Create()
+	err := post.Create()
+	if err != nil {
+		panic(err)
+	}
 
 	// Add a comment
 	comment := Comment{Content: "Good post!", Author: "Joe", Post: &post}

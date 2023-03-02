@@ -17,7 +17,7 @@ var Db *sqlx.DB
 // connect to the Db
 func init() {
 	var err error
-	Db, err = sqlx.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	Db, err = sqlx.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -35,7 +35,8 @@ func GetPost(id int) (post Post, err error) {
 
 // Create a new post
 func (post *Post) Create() (err error) {
-	err = Db.QueryRow("insert into posts (content, author) values ($1, $2) returning id", post.Content, post.AuthorName).Scan(&post.Id)
+	err = Db.QueryRow("insert into posts (content, author) values ($1, $2) returning id",
+		post.Content, post.AuthorName).Scan(&post.Id)
 	return
 }
 
