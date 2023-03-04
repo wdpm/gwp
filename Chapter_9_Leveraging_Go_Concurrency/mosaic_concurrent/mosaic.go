@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 	"image/color"
-	"io/ioutil"
 	"math"
 	"os"
 	"path/filepath"
@@ -18,6 +17,11 @@ type DB struct {
 
 func (db *DB) nearest(target [3]float64) string {
 	var filename string
+	// avoid race conditions between goroutines
+	// 需要注意的是，因为在从数据库⾥移除被选中的图⽚之前，多个
+	// goroutine还是有可能会把相同的瓷砖图⽚设置为最佳的匹配结果，所以
+	// 只锁住delete 函数是⽆法移除竞争条件的，因此修改后的nearest
+	// 函数将把寻找最佳匹配瓷砖图⽚的整个区域（section）都锁住
 	db.mutex.Lock()
 	smallest := 1000000.0
 	for k, v := range db.store {
@@ -26,6 +30,7 @@ func (db *DB) nearest(target [3]float64) string {
 			filename, smallest = k, dist
 		}
 	}
+	// 如果多个cut 函数中的 goroutine同时找到了同⼀瓷砖图⽚作为最佳匹配结果，就会产⽣⼀个竞争条件
 	delete(db.store, filename)
 	db.mutex.Unlock()
 	return filename
@@ -78,7 +83,7 @@ func cloneTilesDB() DB {
 func tilesDB() map[string][3]float64 {
 	fmt.Println("Start populating tiles db ...")
 	db := make(map[string][3]float64)
-	files, _ := ioutil.ReadDir("tiles")
+	files, _ := os.ReadDir("tiles")
 	for _, f := range files {
 		name := filepath.Join("tiles", f.Name())
 		file, err := os.Open(name)

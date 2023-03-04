@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"image"
 	"image/color"
-	"io/ioutil"
 	"math"
 	"os"
 )
@@ -52,7 +51,7 @@ func cloneTilesDB() map[string][3]float64 {
 func tilesDB() map[string][3]float64 {
 	fmt.Println("Start populating tiles db ...")
 	db := make(map[string][3]float64)
-	files, _ := ioutil.ReadDir("tiles")
+	files, _ := os.ReadDir("tiles")
 	for _, f := range files {
 		name := "tiles/" + f.Name()
 		file, err := os.Open(name)
@@ -82,11 +81,14 @@ func nearest(target [3]float64, db *map[string][3]float64) string {
 			filename, smallest = k, dist
 		}
 	}
+	// side effect?
 	delete(*db, filename)
+	// fmt.Printf("filename: %s\n", filename)
+	// fix sometimes return "" because *db is an empty map
 	return filename
 }
 
-// find the Eucleadian distance between 2 points
+// find the Euclidean distance between 2 points
 func distance(p1 [3]float64, p2 [3]float64) float64 {
 	return math.Sqrt(sq(p2[0]-p1[0]) + sq(p2[1]-p1[1]) + sq(p2[2]-p1[2]))
 }

@@ -47,4 +47,13 @@ func TestLongRunningTest(t *testing.T) {
 
 // cd unit_testing
 // go test  -v
-// go test --short -v
+// go test -short -v
+// go test –v -cover
+
+// go test –v –short –parallel 3
+
+// go test -v -cover -short –bench .
+// go test -v -cover -short –bench .
+
+// only bench test
+// go test -run=None -bench .

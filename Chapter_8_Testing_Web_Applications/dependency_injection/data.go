@@ -6,13 +6,14 @@ import (
 )
 
 type Text interface {
-  fetch(id int) (err error)
-  create() (err error)
-  update() (err error)
-  delete() (err error)
+	fetch(id int) (err error)
+	create() (err error)
+	update() (err error)
+	delete() (err error)
 }
 
 type Post struct {
+	// 这里注入了一个特殊的字段，表示DB
 	Db      *sql.DB
 	Id      int    `json:"id"`
 	Content string `json:"content"`

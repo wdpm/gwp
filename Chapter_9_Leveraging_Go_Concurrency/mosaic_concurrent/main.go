@@ -113,7 +113,7 @@ func combine(r image.Rectangle, c1, c2, c3, c4 <-chan image.Image) <-chan string
 	return c
 }
 
-//  Handler function for fan-out and fan-in
+// Handler function for fan-out and fan-in
 func mosaic(w http.ResponseWriter, r *http.Request) {
 	t0 := time.Now()
 	// get the content from the POSTed form
@@ -126,6 +126,7 @@ func mosaic(w http.ResponseWriter, r *http.Request) {
 	original, _, _ := image.Decode(file)
 	bounds := original.Bounds()
 	db := cloneTilesDB()
+	// 这里多个goroutines 共享一个&db instance
 	// fan-out
 	c1 := cut(original, &db, tileSize, bounds.Min.X, bounds.Min.Y, bounds.Max.X/2, bounds.Max.Y/2)
 	c2 := cut(original, &db, tileSize, bounds.Max.X/2, bounds.Min.Y, bounds.Max.X, bounds.Max.Y/2)

@@ -12,7 +12,7 @@ import (
 func main() {
 	// connect to the Db
 	var err error
-	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -20,7 +20,7 @@ func main() {
 	server := http.Server{
 		Addr: "127.0.0.1:8080",
 	}
-	http.HandleFunc("/post/", handleRequest(&Post{Db: *db}))
+	http.HandleFunc("/post/", handleRequest(&Post{Db: db}))
 	server.ListenAndServe()
 }
 
@@ -67,9 +67,11 @@ func handleGet(w http.ResponseWriter, r *http.Request, post Text) (err error) {
 	if err != nil {
 		return
 	}
-  w.Header().Set("Content-Type", "application/json")
-  w.Write(output)
-  http.NotFound(w, r)
+	w.Header().Set("Content-Type", "application/json")
+	w.Write(output)
+
+	// make a error on purpose
+	http.NotFound(w, r)
 	return
 }
 

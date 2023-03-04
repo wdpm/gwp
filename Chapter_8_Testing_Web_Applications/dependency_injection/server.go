@@ -12,7 +12,7 @@ import (
 func main() {
 	// connect to the Db
 	var err error
-	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
@@ -24,8 +24,7 @@ func main() {
 	server.ListenAndServe()
 }
 
-
-// main handler function
+// main handler function 注意这里嵌套了函数实现，返回的函数签名符合ServeHTTP()
 func handleRequest(t Text) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
 		var err error

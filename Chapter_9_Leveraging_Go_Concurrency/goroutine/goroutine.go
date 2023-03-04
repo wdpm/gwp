@@ -1,7 +1,8 @@
 package main
 
-// import "fmt"
-import "time"
+import (
+	"time"
+)
 
 func printNumbers1() {
 	for i := 0; i < 10; i++ {
@@ -36,7 +37,7 @@ func print1() {
 
 func goPrint1() {
 	go printNumbers1()
-	go printLetters1()	
+	go printLetters1()
 }
 
 func print2() {
@@ -50,4 +51,6 @@ func goPrint2() {
 }
 
 func main() {
+	// print1()
+	goPrint1()
 }

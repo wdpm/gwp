@@ -4,9 +4,9 @@ import (
 	"encoding/json"
 	. "github.com/onsi/ginkgo"
 	. "github.com/onsi/gomega"
-	. "gwp/Chapter_8_Testing_Web_Applications/test_ginkgo"
 	"net/http"
 	"net/http/httptest"
+	. "test_ginkgo"
 )
 
 var _ = Describe("Get a post", func() {

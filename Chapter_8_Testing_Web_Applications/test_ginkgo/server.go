@@ -12,7 +12,7 @@ import (
 func main() {
 	// connect to the Db
 	var err error
-	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=gwp sslmode=disable")
+	db, err := sql.Open("postgres", "user=gwp dbname=gwp password=123456 sslmode=disable")
 	if err != nil {
 		panic(err)
 	}

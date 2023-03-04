@@ -6,7 +6,7 @@ import (
 )
 
 type Post struct {
-	Db      sql.DB
+	Db      *sql.DB
 	Id      int    `json:"id"`
 	Content string `json:"content"`
 	Author  string `json:"author"`

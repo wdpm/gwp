@@ -6,3 +6,12 @@ api_version: go1
 handlers:
 - url: /.*
   script: _go_app
+
+# run in local
+# > goapp serve
+
+# deploy
+# > goapp deploy
+
+# url
+# http://ws-g-1234.appspot.com/

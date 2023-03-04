@@ -22,14 +22,15 @@ func main() {
 	openA, openB := true, true
 	for openA || openB {
 		select {
+		// openA 在第一次取值时是true，之后chan close之后，再取就是false
 		case msg, openA = <-a:
 			if openA {
 				fmt.Printf("%s from A\n", msg)
-			}			
+			}
 		case msg, openB = <-b:
 			if openB {
 				fmt.Printf("%s from B\n", msg)
-			}			
+			}
 		}
 	}
 }

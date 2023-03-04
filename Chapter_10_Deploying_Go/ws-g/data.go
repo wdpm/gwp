@@ -10,6 +10,7 @@ var Db *sql.DB
 // connect to the Db
 func init() {
 	var err error
+	// cloudsql:<app ID>:<instance name>*<database name>/<user name>/<password>
 	Db, err = sql.Open("mymysql", "cloudsql:ws-g-1234:gwp*gwp/root/root123")
 	if err != nil {
 		panic(err)
@@ -19,6 +20,7 @@ func init() {
 // Get a single post
 func retrievePost(id int) (post Post, err error) {
 	post = Post{}
+	// $1 、$2 => ?
 	err = Db.QueryRow("select id, content, author from posts where id = ?", id).Scan(&post.Id, &post.Content, &post.Author)
 	return
 }

@@ -10,7 +10,8 @@ var Db *sql.DB
 // connect to the Db
 func init() {
 	var err error
-	Db, err = sql.Open("postgres", "host=babar.elephantsql.com user=qjnqlnxs dbname=qjnqlnxs password=VSIjUweR1jWi3lf33R9EmlYVppgFJrwu sslmode=disable")
+	Db, err = sql.Open("postgres", "host=babar.elephantsql.com user=qjnqlnxs dbname=qjnqlnxs"+
+		" password=VSIjUweR1jWi3lf33R9EmlYVppgFJrwu sslmode=disable")
 	if err != nil {
 		panic(err)
 	}
